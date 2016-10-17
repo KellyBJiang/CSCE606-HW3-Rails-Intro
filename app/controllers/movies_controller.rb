@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings=Movie.all_ratings
+    
     redirect = false
     
     logger.debug(session.inspect)
@@ -29,6 +30,8 @@ class MoviesController < ApplicationController
     if params[:commit] == "Refresh" and params[:ratings].nil?
         @ratings = nil
         session[:ratings] = nil
+        @sort_by = nil
+        session[:sort_by]= nil
     elsif params[:ratings]
         @ratings = params[:ratings]
         session[:ratings] = params[:ratings]
@@ -53,10 +56,10 @@ class MoviesController < ApplicationController
     else
         @movies = Movie.all
     end
+    
     if !@ratings
         @ratings = Hash.new
     end
-   
   end
 
   def new
