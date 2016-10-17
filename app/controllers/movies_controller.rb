@@ -20,6 +20,8 @@ class MoviesController < ApplicationController
     if params[:sort_by]
         @sort_by = params[:sort_by]
         session[:sort_by] = params[:sort_by]
+        @ratings= params[:ratings]
+        session[:ratings] = params[:ratings]
     elsif session[:sort_by]
         @sort_by = session[:sort_by]
         redirect = true
